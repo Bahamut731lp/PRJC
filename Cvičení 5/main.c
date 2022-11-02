@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "stack.h"
 
 typedef enum
 {
@@ -9,6 +10,19 @@ typedef enum
     true = 1
 } bool;
 
+/**
+ * Zásobník pro ukládání změn
+*/
+struct stack do_history = {NULL};
+
+/**
+ * Zásobník pro ukládání provedených undo operací
+*/
+struct stack undo_history = {NULL};
+
+/**
+ * Pomocná funkce pro kontrolu, jestli je index v rozsahu stringu
+*/
 bool is_in_bounds(char *string, int position)
 {
     if (position < 1) return false;
@@ -100,4 +114,7 @@ int main()
 
     edit_sub(string, ptr, 1);
     printf("%s\n", string);
+
+    //cleanup:
+    //free();
 }
